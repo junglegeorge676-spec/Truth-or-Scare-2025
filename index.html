@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,55 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Truth or Scare</title>
   <meta name="theme-color" content="#111111">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   <style>
-    :root{
-      --bg:#0f0f10;--card:#1a1a1d;--ink:#f4f4f5;--muted:#b0b0b8;--accent:#f59e0b;--accent2:#7c3aed;
-      --pill-truth:#f59e0b;--pill-scare:#7c3aed
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      color:var(--ink);background:var(--bg);
-      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-    }
+    :root{--bg:#0f0f10;--ink:#f4f4f5;--muted:#b0b0b8;--accent:#f59e0b;--accent2:#7c3aed}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
     .wrap{max-width:720px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:16px}
     header{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
     h1{font-size:1.6rem;margin:0;font-weight:700;letter-spacing:-0.02em}
     button{border:0;border-radius:18px;padding:14px 16px;font-weight:700;color:#101014;cursor:pointer}
-    .btn-truth{background:var(--accent)}
-    .btn-scare{background:var(--accent2);color:#fff}
+    .btn-truth{background:var(--accent)} .btn-scare{background:var(--accent2);color:#fff}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .card{
-      background:linear-gradient(180deg,#222227, #18181b);
-      border-radius:22px;padding:18px 16px;box-shadow:0 10px 30px rgba(0,0,0,.25)
-    }
+    .card{background:linear-gradient(180deg,#222227,#18181b);border-radius:22px;padding:18px 16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
     .row{display:flex;gap:8px;align-items:center}
-    .grow{flex:1}
     .pill{color:#fff;border-radius:999px;padding:6px 10px;font-size:.72rem;font-weight:800;letter-spacing:.04em}
-    .pill-truth{background:var(--pill-truth)}
-    .pill-scare{background:var(--pill-scare)}
-    .muted{color:var(--muted)}
-    .card p{font-size:1.15rem;line-height:1.5;margin:10px 0 2px}
-    input[type=text]{
-      width:100%;padding:14px;border-radius:16px;border:1px solid #2a2a30;background:#121215;color:var(--ink);
-      outline:none
-    }
+    .pill-truth{background:#f59e0b} .pill-scare{background:#7c3aed}
+    .muted{color:var(--muted)} .card p{font-size:1.15rem;line-height:1.5;margin:10px 0 2px}
+    input[type=text]{width:100%;padding:14px;border-radius:16px;border:1px solid #2a2a30;background:#121215;color:var(--ink);outline:none}
     .chip{font-size:.7rem;padding:6px 8px;border-radius:999px;background:#26262b;color:#c9c9ce}
-    .tiny{font-size:.75rem}
-    ul{list-style:none;margin:0;padding:0}
-    li{display:flex;gap:8px}
+    .tiny{font-size:.75rem} ul{list-style:none;margin:0;padding:0} li{display:flex;gap:8px}
     .badge{font-size:.62rem;border-radius:6px;padding:2px 6px;margin-top:2px;color:#fff}
-    .b-truth{background:var(--pill-truth)} .b-scare{background:var(--pill-scare)}
+    .b-truth{background:#f59e0b} .b-scare{background:#7c3aed}
     .controls button{background:#2a2a30;color:#f4f4f5;border-radius:14px;padding:10px 12px;font-weight:600}
-    .controls{display:flex;gap:8px}
-    footer{color:#8d8d94;text-align:center;margin:18px 0 56px}
-    @media (hover:hover){
-      button:hover{filter:brightness(1.03)}
-    }
+    .controls{display:flex;gap:8px} footer{color:#8d8d94;text-align:center;margin:18px 0 56px}
   </style>
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
   <div class="wrap">
@@ -95,240 +70,214 @@
     <footer class="tiny">Stash saves to your device. Hydrate between rounds. 🎃</footer>
   </div>
 
-<script>
-(function(){
-  const DEFAULT_TRUTHS = [
-    "What was your childhood 'house is haunted' moment?",
-    "Tell a time you swore you heard footsteps when you were alone.",
-    "What’s the eeriest thing you’ve seen from a window at night?",
-    "Have you ever slept with a light on after a movie? Which one?",
-    "What object from your home would a ghost absolutely hate — and why?",
-    "Biggest fear you outgrew — and what replaced it?",
-    "Which ordinary place (elevator, basement, parking garage) creeps you out most?",
-    "Would you spend a night in a real abandoned building for $1,000? Why/why not?",
-    "What sound gives you instant goosebumps?",
-    "What’s your ‘unreasonable but real’ travel fear?",
-    "If your phone died in a forest at night, what’s your survival plan?",
-    "Which animal do you irrationally distrust?",
-    "Harmless prank you’re proud of (or guilty about)?",
-    "Most ‘villain arc’ thing you’ve done in a board game or group game?",
-    "Tell a time you lied because the truth was too weird.",
-    "What would tempt you to enter a forbidden room with a ‘Do Not Open’ sign?",
-    "When have you purposely made a story spookier than it was?",
-    "Which superstition do you obey even though you don’t believe it?",
-    "Which classic monster would actually be a good partner? Defend your pick.",
-    "What would a love letter from a vampire to you say in one sentence?",
-    "What’s a ‘dealbreaker’ costume or fashion choice on Halloween night?",
-    "What song would score your doomed-romance montage?",
-    "What’s your ‘final girl/final guy’ strength — and your fatal flaw?",
-    "If a witch offered you one tiny curse to put on a daily annoyance, what would it be?",
-    "You wake up invisible until dawn. What do you do (legal and kind)?",
-    "You can talk to one inanimate object for 5 minutes. Which object?",
-    "You get a guaranteed true yes/no answer about the future. Ask what?",
-    "For one night, you see everyone’s aura color. What are we learning?",
-    "Pick a horror trope you’d remove from the universe forever. Why?",
-    "One real historical mystery you wish to solve on the spot — which?",
-    "Describe the creepiest house you’ve ever been in.",
-    "What fear do you want to face in the next year?",
-    "What food combo you love would others call monstrous?",
-    "Which urban legend secretly feels plausible to you?",
-    "Tell a secret talent you’d use to survive a haunted maze.",
-    "What costume says the most about your personality — and why?"
-  ];
-  const DEFAULT_SCARES = [
-    "Deliver a 20-second ghost monologue whispering secrets from ‘the attic’.",
-    "Slow-motion werewolf transformation while narrating your inner thoughts.",
-    "Villain laugh ladder: five laughs, each bigger than the last.",
-    "Perform a 30-second séance to contact your lost remote — straight face only.",
-    "Recite the alphabet like a terrified museum guide discovering a cursed statue.",
-    "Silent-movie panic at an imaginary tiny spider (no words).",
-    "Read your partner’s palm and foretell three oddly specific events tonight.",
-    "Describe the last horror movie you saw using only sound effects.",
-    "Breaking news: a pumpkin uprising — give the bulletin.",
-    "Be a polite demon new at haunting and ask for customer feedback.",
-    "Narrate a cooking show for witch’s brew using only pantry items.",
-    "Sing a commercial jingle for garlic as vampire repellent.",
-    "Walk 10 steps like a haunted duchess with a book balanced on your head.",
-    "Mummy-wrap with toilet paper in 60 seconds (no tearing).",
-    "Freeze like a statue whenever your partner says ‘boo’ for the next minute.",
-    "Do a 15-second ‘zombie trying to use Face ID’ routine.",
-    "Choreograph a 20-second exorcise (workout for demons).",
-    "Imitate three monsters using only hands and posture.",
-    "Give a 30-second ghost tour; every object gets a tragic backstory.",
-    "Invent and sell a new urban legend that happens in your bathroom.",
-    "Dramatic reading of the nearest product label like a cursed scroll.",
-    "Summon an imaginary familiar and introduce its likes/dislikes.",
-    "Courtroom defense: argue a vampire’s right to nighttime parking.",
-    "Pitch a two-sentence horror film set exactly where you’re sitting.",
-    "Name five horror clichés in 15 seconds.",
-    "Rhyme ‘witch’ five times in a row with different words.",
-    "Find three objects as ‘protective charms’ and justify each.",
-    "Without looking, describe your partner’s outfit like a sketch artist.",
-    "Retitle three playlist songs so they sound spooky.",
-    "Do a ten-count jump-scare build and deliver your best scare at ‘1’."
-  ];
+  <script>
+  (function(){
+    const DEFAULT_TRUTHS = [
+      "What was your childhood 'house is haunted' moment?",
+      "Tell a time you swore you heard footsteps when you were alone.",
+      "What's the eeriest thing you've seen from a window at night?",
+      "Have you ever slept with a light on after a movie? Which one?",
+      "What object from your home would a ghost absolutely hate — and why?",
+      "Biggest fear you outgrew — and what replaced it?",
+      "Which ordinary place (elevator, basement, parking garage) creeps you out most?",
+      "Would you spend a night in a real abandoned building for $1,000? Why/why not?",
+      "What sound gives you instant goosebumps?",
+      "What's your 'unreasonable but real' travel fear?",
+      "If your phone died in a forest at night, what's your survival plan?",
+      "Which animal do you irrationally distrust?",
+      "Harmless prank you're proud of (or guilty about)?",
+      "Most 'villain arc' thing you've done in a board game or group game?",
+      "Tell a time you lied because the truth was too weird.",
+      "What would tempt you to enter a forbidden room with a 'Do Not Open' sign?",
+      "When have you purposely made a story spookier than it was?",
+      "Which superstition do you obey even though you don't believe it?",
+      "Which classic monster would actually be a good partner? Defend your pick.",
+      "What would a love letter from a vampire to you say in one sentence?",
+      "What's a 'dealbreaker' costume or fashion choice on Halloween night?",
+      "What song would score your doomed-romance montage?",
+      "What's your 'final girl/final guy' strength — and your fatal flaw?",
+      "If a witch offered you one tiny curse to put on a daily annoyance, what would it be?",
+      "You wake up invisible until dawn. What do you do (legal and kind)?",
+      "You can talk to one inanimate object for 5 minutes. Which object?",
+      "You get a guaranteed true yes/no answer about the future. Ask what?",
+      "For one night, you see everyone's aura color. What are we learning?",
+      "Pick a horror trope you'd remove from the universe forever. Why?",
+      "One real historical mystery you wish to solve on the spot — which?",
+      "Describe the creepiest house you've ever been in.",
+      "What fear do you want to face in the next year?",
+      "What food combo you love would others call monstrous?",
+      "Which urban legend secretly feels plausible to you?",
+      "Tell a secret talent you'd use to survive a haunted maze.",
+      "What costume says the most about your personality — and why?"
+    ];
+    const DEFAULT_SCARES = [
+      "Deliver a 20-second ghost monologue whispering secrets from the attic.",
+      "Slow-motion werewolf transformation while narrating your inner thoughts.",
+      "Villain laugh ladder: five laughs, each bigger than the last.",
+      "Perform a 30-second séance to contact your lost remote — straight face only.",
+      "Recite the alphabet like a terrified museum guide discovering a cursed statue.",
+      "Silent-movie panic at an imaginary tiny spider (no words).",
+      "Read your partner's palm and foretell three oddly specific events tonight.",
+      "Describe the last horror movie you saw using only sound effects.",
+      "Breaking news: a pumpkin uprising — give the bulletin.",
+      "Be a polite demon new at haunting and ask for customer feedback.",
+      "Narrate a cooking show for witch's brew using only pantry items.",
+      "Sing a commercial jingle for garlic as vampire repellent.",
+      "Walk 10 steps like a haunted duchess with a book balanced on your head.",
+      "Mummy-wrap with toilet paper in 60 seconds (no tearing).",
+      "Freeze like a statue whenever your partner says 'boo' for the next minute.",
+      "Do a 15-second 'zombie trying to use Face ID' routine.",
+      "Choreograph a 20-second exorcise (workout for demons).",
+      "Imitate three monsters using only hands and posture.",
+      "Give a 30-second ghost tour; every object gets a tragic backstory.",
+      "Invent and sell a new urban legend that happens in your bathroom.",
+      "Dramatic reading of the nearest product label like a cursed scroll.",
+      "Summon an imaginary familiar and introduce its likes/dislikes.",
+      "Courtroom defense: argue a vampire's right to nighttime parking.",
+      "Pitch a two-sentence horror film set exactly where you're sitting.",
+      "Name five horror cliches in 15 seconds.",
+      "Rhyme 'witch' five times in a row with different words.",
+      "Find three objects as 'protective charms' and justify each.",
+      "Without looking, describe your partner's outfit like a sketch artist.",
+      "Retitle three playlist songs so they sound spooky.",
+      "Do a ten-count jump-scare build and deliver your best scare at '1'."
+    ];
 
-  const $ = (sel)=>document.querySelector(sel);
-  const $$ = (sel)=>document.querySelectorAll(sel);
+    const $ = (sel)=>document.querySelector(sel);
+    const LS=(k,v)=> v===undefined? JSON.parse(localStorage.getItem(k)||"null") : localStorage.setItem(k, JSON.stringify(v));
+    const shuffle=(n)=>{ const a=Array.from({length:n},(_,i)=>i); for(let i=n-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];} return a; };
 
-  const LS = (k, v)=> v===undefined ? JSON.parse(localStorage.getItem(k) || 'null') : localStorage.setItem(k, JSON.stringify(v));
-
-  const state = {
-    mode: LS('tos_mode') ?? 'truth',
-    truthDeck: LS('tos_truthDeck') ?? DEFAULT_TRUTHS.slice(),
-    scareDeck: LS('tos_scareDeck') ?? DEFAULT_SCARES.slice(),
-    truthOrder: LS('tos_truthOrder') ?? shuffleIndexes(DEFAULT_TRUTHS.length),
-    scareOrder: LS('tos_scareOrder') ?? shuffleIndexes(DEFAULT_SCARES.length),
-    truthIdx: LS('tos_truthIdx') ?? 0,
-    scareIdx: LS('tos_scareIdx') ?? 0,
-    history: LS('tos_history') ?? [],
-    current: ""
-  };
-
-  const el = {
-    modePill: $('#mode-pill'),
-    current: $('#current'),
-    history: $('#history'),
-    counts: $('#counts'),
-    custom: $('#custom'),
-    add: $('#add'),
-    reset: $('#reset'),
-    drawTruth: $('#draw-truth'),
-    drawScare: $('#draw-scare'),
-    share: $('#share'),
-  };
-
-  function save(){
-    LS('tos_mode', state.mode);
-    LS('tos_truthDeck', state.truthDeck);
-    LS('tos_scareDeck', state.scareDeck);
-    LS('tos_truthOrder', state.truthOrder);
-    LS('tos_scareOrder', state.scareOrder);
-    LS('tos_truthIdx', state.truthIdx);
-    LS('tos_scareIdx', state.scar eIdx);
-    LS('tos_history', state.history.slice(0, 50));
-  }
-
-  // fix a typo caused by copy; reassign properly
-  function saveFix(){
-    localStorage.setItem('tos_scareIdx', JSON.stringify(state.scareIdx));
-  }
-
-  function shuffleIndexes(n){
-    const a = Array.from({length:n}, (_,i)=>i);
-    for(let i=n-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [a[i],a[j]]=[a[j],a[i]];
+    const state = {
+      mode: LS("tos_mode") ?? "truth",
+      truthDeck: LS("tos_truthDeck") ?? DEFAULT_TRUTHS.slice(),
+      scareDeck: LS("tos_scareDeck") ?? DEFAULT_SCARES.slice(),
+      truthOrder: LS("tos_truthOrder") ?? shuffle(DEFAULT_TRUTHS.length),
+      scareOrder: LS("tos_scareOrder") ?? shuffle(DEFAULT_SCARES.length),
+      truthIdx: LS("tos_truthIdx") ?? 0,
+      scareIdx: LS("tos_scareIdx") ?? 0,
+      history: LS("tos_history") ?? [],
+      current: ""
+    };
+    function save(){
+      LS("tos_mode", state.mode);
+      LS("tos_truthDeck", state.truthDeck);
+      LS("tos_scareDeck", state.scareDeck);
+      LS("tos_truthOrder", state.truthOrder);
+      LS("tos_scareOrder", state.scareOrder);
+      LS("tos_truthIdx", state.truthIdx);
+      LS("tos_scareIdx", state.scareIdx);
+      LS("tos_history", state.history.slice(0,50));
     }
-    return a;
-  }
 
-  function setMode(m){
-    state.mode = m;
-    el.modePill.textContent = m === 'truth' ? 'Truth' : 'Scare';
-    el.modePill.className = 'pill ' + (m==='truth' ? 'pill-truth' : 'pill-scare');
-    el.custom.placeholder = m==='truth' ? 'Add a Truth card… (switch for Scare)' : 'Add a Scare card… (switch for Truth)';
-    save(); saveFix();
-  }
+    const el = {
+      pill: $("#mode-pill"),
+      current: $("#current"),
+      history: $("#history"),
+      counts: $("#counts"),
+      custom: $("#custom"),
+      add: $("#add"),
+      reset: $("#reset"),
+      drawTruth: $("#draw-truth"),
+      drawScare: $("#draw-scare"),
+      share: $("#share")
+    };
 
-  function vibrate(ms=10){ if(navigator.vibrate){ try{ navigator.vibrate(ms);}catch(e){} } }
-
-  function draw(which){
-    setMode(which);
-    vibrate(10);
-    if(which==='truth'){
-      if(state.truthIdx >= state.truthOrder.length){
-        state.truthOrder = shuffleIndexes(state.truthDeck.length);
-        state.truthIdx = 0;
-      }
-      const idx = state.truthOrder[state.truthIdx] ?? 0;
-      const text = state.truthDeck[idx];
-      state.truthIdx++;
-      state.current = text;
-      state.history.unshift({type:'Truth', text});
-    }else{
-      if(state.scareIdx >= state.scareOrder.length){
-        state.scareOrder = shuffleIndexes(state.scareDeck.length);
-        state.scareIdx = 0;
-      }
-      const idx = state.scareOrder[state.scareIdx] ?? 0;
-      const text = state.scareDeck[idx];
-      state.scareIdx++;
-      state.current = text;
-      state.history.unshift({type:'Scare', text});
+    function setMode(m){
+      state.mode = m;
+      el.pill.textContent = m==="truth" ? "Truth" : "Scare";
+      el.pill.className = "pill " + (m==="truth" ? "pill-truth" : "pill-scare");
+      el.custom.placeholder = m==="truth" ? "Add a Truth card… (switch for Scare)" : "Add a Scare card… (switch for Truth)";
+      save();
     }
-    state.history = state.history.slice(0,50);
-    render();
-    save(); saveFix();
-  }
 
-  function addCard(){
-    const val = (el.custom.value||'').trim();
-    if(!val) return;
-    if(state.mode==='truth'){
-      state.truthDeck.push(val);
-      state.truthOrder = shuffleIndexes(state.truthDeck.length);
-    }else{
-      state.scareDeck.push(val);
-      state.scareOrder = shuffleIndexes(state.scareDeck.length);
-    }
-    el.custom.value='';
-    save(); saveFix();
-    render();
-  }
-
-  function resetAll(){
-    if(!confirm('Reset to defaults and clear custom cards?')) return;
-    state.mode='truth';
-    state.truthDeck = DEFAULT_TRUTHS.slice();
-    state.scareDeck = DEFAULT_SCARES.slice();
-    state.truthOrder = shuffleIndexes(state.truthDeck.length);
-    state.scareOrder = shuffleIndexes(state.scareDeck.length);
-    state.truthIdx=0; state.scareIdx=0;
-    state.history=[]; state.current = 'Deck reset. Tap Truth or Scare to draw.';
-    render();
-    save(); saveFix();
-  }
-
-  async function share(){
-    const payload = (state.mode==='truth'?'Truth':'Scare') + ': ' + (state.current||'');
-    try{
-      if(navigator.share){
-        await navigator.share({title:'Truth or Scare', text:payload});
-      }else{
-        await navigator.clipboard.writeText(payload);
-        alert('Copied to clipboard!');
+    function draw(which){
+      setMode(which);
+      if (which==="truth"){
+        if (state.truthIdx >= state.truthOrder.length){ state.truthOrder = shuffle(state.truthDeck.length); state.truthIdx = 0; }
+        const idx = state.truthOrder[state.truthIdx] ?? 0;
+        const text = state.truthDeck[idx];
+        state.truthIdx++;
+        state.current = text;
+        state.history.unshift({type:"Truth", text});
+      } else {
+        if (state.scareIdx >= state.scareOrder.length){ state.scareOrder = shuffle(state.scareDeck.length); state.scareIdx = 0; }
+        const idx = state.scareOrder[state.scareIdx] ?? 0;
+        const text = state.scareDeck[idx];
+        state.scareIdx++;
+        state.current = text;
+        state.history.unshift({type:"Scare", text});
       }
-    }catch(e){
+      state.history = state.history.slice(0,50);
+      render();
+      save();
+    }
+
+    function addCard(){
+      const val = (el.custom.value||"").trim();
+      if(!val) return;
+      if(state.mode==="truth"){
+        state.truthDeck.push(val);
+        state.truthOrder = shuffle(state.truthDeck.length);
+      } else {
+        state.scareDeck.push(val);
+        state.scareOrder = shuffle(state.scareDeck.length);
+      }
+      el.custom.value="";
+      save();
+      render();
+    }
+
+    function resetAll(){
+      if(!confirm("Reset to defaults and clear custom cards?")) return;
+      state.mode="truth";
+      state.truthDeck = DEFAULT_TRUTHS.slice();
+      state.scareDeck = DEFAULT_SCARES.slice();
+      state.truthOrder = shuffle(state.truthDeck.length);
+      state.scareOrder = shuffle(state.scareDeck.length);
+      state.truthIdx=0; state.scareIdx=0;
+      state.history=[]; state.current="Deck reset. Tap Truth or Scare to draw.";
+      render();
+      save();
+    }
+
+    async function shareCard(){
+      const payload = (state.mode==="truth"?"Truth":"Scare")+": "+(state.current||"");
       try{
-        await navigator.clipboard.writeText(payload);
-        alert('Copied to clipboard!');
-      }catch(_){}
+        if(navigator.share){ await navigator.share({title:"Truth or Scare", text:payload}); }
+        else { await navigator.clipboard.writeText(payload); alert("Copied to clipboard!"); }
+      }catch(e){
+        try{ await navigator.clipboard.writeText(payload); alert("Copied to clipboard!"); }catch(_){}
+      }
     }
-  }
 
-  function render(){
-    el.current.textContent = state.current || 'Tap Truth or Scare to draw a card.';
-    el.history.innerHTML = state.history.map(h => (
-      `<li><span class="badge ${h.type==='Truth'?'b-truth':'b-scare'}">${h.type}</span><span>${h.text}</span></li>`
-    )).join('');
-    el.counts.textContent = `${state.history.length} drawn · Truth:${state.truthIdx}/${state.truthOrder.length} · Scare:${state.scareIdx}/${state.scareOrder.length}`;
-  }
+    function render(){
+      el.current.textContent = state.current || "Tap Truth or Scare to draw a card.";
+      el.history.innerHTML = state.history.map(h =>
+        '<li><span class="badge '+(h.type==='Truth'?'b-truth':'b-scare')+'">'+h.type+
+        '</span><span>'+h.text+'</span></li>'
+      ).join("");
+      el.counts.textContent = state.history.length+" drawn · Truth:"+state.truthIdx+"/"+state.truthOrder.length+" · Scare:"+state.scareIdx+"/"+state.scareOrder.length;
+    }
 
-  // Event listeners
-  el.drawTruth.addEventListener('click', ()=>draw('truth'));
-  el.drawScare.addEventListener('click', ()=>draw('scare'));
-  el.add.addEventListener('click', addCard);
-  el.custom.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ addCard(); }});
-  el.reset.addEventListener('click', resetAll);
-  el.share.addEventListener('click', share);
+    el.drawTruth.addEventListener("click", ()=>draw("truth"));
+    el.drawScare.addEventListener("click", ()=>draw("scare"));
+    el.add.addEventListener("click", addCard);
+    el.custom.addEventListener("keydown", (e)=>{ if(e.key==="Enter") addCard(); });
+    el.reset.addEventListener("click", resetAll);
+    el.share.addEventListener("click", shareCard);
 
-  // First render
-  setMode(state.mode);
-  state.current = state.current || 'Tap Truth or Scare to draw a card.';
-  render();
-})();
-</script>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}</script>
+    setMode(state.mode);
+    state.current = state.current || "Tap Truth or Scare to draw a card.";
+    render();
+  })();
+  </script>
+
+  <script>
+    if("serviceWorker" in navigator){
+      window.addEventListener("load", function(){
+        navigator.serviceWorker.register("./sw.js").catch(()=>{});
+      });
+    }
+  </script>
 </body>
 </html>
